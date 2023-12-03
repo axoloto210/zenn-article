@@ -1,6 +1,6 @@
 ---
-title: "文字列はプリミティブ値なのにlengthプロパティを参照できるわけ"
-emoji: "🎄"
+title: "文字列はプリミティブ値なのにlengthプロパティをもつ？"
+emoji: "👨‍👩‍👧‍👧"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [TypeScript, JavaScript, adventcalendar]
 published: true
