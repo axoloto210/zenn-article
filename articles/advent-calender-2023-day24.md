@@ -1,5 +1,5 @@
 ---
-title: "Record型やReturnType型などのユーリティティ型をみてみる"
+title: "Record型やReturnType型などのユーティリティ型をみてみる"
 emoji: "📆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [TypeScript, JavaScript, adventcalendar]
