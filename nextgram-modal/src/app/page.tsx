@@ -9,6 +9,8 @@ export default function Page () {
         <Link href='/intercepting-routes'><button>Intercepting Routes</button></Link>
         <br/>
         <Link href='/parallel-intercepting'><button>Modal</button></Link>
+        <br/>
+        <Link href='/about'><button>About (not work intercept)</button></Link>
         </>
     )
 }

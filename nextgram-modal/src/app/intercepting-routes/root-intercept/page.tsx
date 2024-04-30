@@ -9,7 +9,7 @@ export default function Page () {
         <br/>
         <Link href='/intercepting-routes/photo/3'><button>photos/3</button></Link>
         <br/>
-        <Link href='/about'><button>About (not work intercept)</button></Link>
+        <Link href='/about'><button>About ((will work intercept))</button></Link>
         </>
     )
 }
