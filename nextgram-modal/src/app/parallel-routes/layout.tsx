@@ -1,9 +1,6 @@
-import { Inter } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
 import HardNavigationButton from "./HardNavigationButton";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Layout({
   teams,
@@ -15,8 +12,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <>
         <Link href="/parallel-routes">
           <button className="m-4 bg-blue-400">soft navigete to root</button>
         </Link>
@@ -30,7 +26,6 @@ export default function Layout({
         <section className="m-4">{children}</section>
         <section className="m-4">{teams}</section>
         <section className="m-4">{analytics}</section>
-      </body>
-    </html>
+    </>
   );
 }
