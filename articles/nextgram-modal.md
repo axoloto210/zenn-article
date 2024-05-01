@@ -66,8 +66,8 @@ slotsはURLに影響を与えないため、同じルート（URL）に対して
 
 ### active state
 Next.jsは各slotについて、**active state**と呼ばれる「表示・非表示状態」を追跡します。
-active stateとは、slotに属するpageが表示されていたかどうかの状態を表すもので、pageが表示されていた状態で別の階層へソフトナビゲーションが起こった場合には、そのURLに対応するページが存在しない場合でも、遷移前に表示していたpageを表示し続けます。
-つまり、各スロットについて、どのpageがアクティブだったか（表示されていたか）を追跡しており、これが各スロットの**active state**と呼ばれるものになります。
+active stateとは、slot に属するpageが表示されていたかどうかの状態を表すもので、pageが表示されていた状態で別の階層へソフトナビゲーションが起こった場合には、そのURLに対応するページが存在しない場合でも、遷移前に表示していたpageを表示し続けます。
+つまり、各slot について、どのpageがアクティブだったか（表示されていたか）を追跡しており、これが各slotの**active state**と呼ばれるものになります。
 ただし、ブラウザリロードなどのハードナビゲーションが起こると、active stateが把握できなくなるため、対応するpageが存在しないURLの場合には、そのslotについては代わりに`default.tsx`の内容が表示されます。
 何も表示したくない場合には、`null`を返すようにしておきます（`default.tsx`を用意しないとエラーページが表示されてしまいます）。
 ```tsx:default.tsx
@@ -94,21 +94,62 @@ app
     ├── layout.tsx
     └── page.tsx
 ```
+teams, analytics, children slot のpage は以下のようにlayoutで受け取って表示できます。
+```tsx:layout.tsx
+import "../globals.css";
+import Link from "next/link";
+import HardNavigationButton from "./HardNavigationButton";
 
-ルートディレクトリ`/`へアクセスした時、rootにあるlayoutには`children`, `teams`, `analytics`が渡されるわけですが、teams slotには`/`に対応するページがないため、`@teams/default.tsx`の内容が表示されます。
-rootのpage.tsxと@analyticsのpage.tsxの内容についてはどちらも表示されます。
+export default function Layout({
+  teams,
+  analytics,
+  children,
+}: Readonly<{
+  teams: React.ReactNode;
+  analytics: React.ReactNode;
+  children: React.ReactNode;
+}>) {
+  return (
+    <>
+        <Link href="/parallel-routes">
+          <button className="m-4 bg-blue-400">soft navigete to root</button>
+        </Link>
+        <br />
+        <Link href="/parallel-routes/settings">
+          <button className="m-4 bg-blue-400">soft navigate to settings</button>
+        </Link>
+        <br />
+        <HardNavigationButton />
 
-ここで、`/settings` へソフトナビゲーションが起こると、teams slot については`@teams/page.tsx` の内容が表示されますが、対応するページがないはずのanalytics slot, children slotについても、`/`で表示されていた内容が**そのまま表示され続けます**。
+        <section className="m-4">{children}</section>
+        <section className="m-4">{teams}</section>
+        <section className="m-4">{analytics}</section>
+    </>
+  );
+}
+
+```
+<br/>
+下のgif画像では`/parallel-routes`から`/parallel-routes/settings`へソフトナビゲーションで遷移した後で再び`/parallel-routes`へ遷移しています。
+![](/images/nextgram-modal/parallel-route.gif)
+
+
+`/parallel-routes`へアクセスした時、layoutには`children`, `teams`, `analytics`が渡されるわけですが、teams slotには`/parallel-routes`に対応するページがないため、`@teams/default.tsx`の内容が表示されます。
+children とanalytics のpage 内容については、どちらも表示されます（紫色の箇所）。
+
+ここで、`/parallel-routes/settings` へソフトナビゲーションが起こると、teams slot については`@teams/page.tsx` の内容が表示されますが、対応するページがないはずのanalytics slot, children slotについても、`/parallel-routes`で表示されていた内容が**そのまま表示され続けます**。
 `@analytics`, `@children`についてはソフトナビゲーションによる遷移前に**コンテンツが表示されていた**ということを**active state**としてNext.js が追跡・把握できているために、そのまま表示するという判断ができているわけですね。
 
-//gifを入れる
+再び`/parallel-routes`へソフトナビゲーションが起こると、初めの表示とは異なり`@teams/default.tsx`ではなく`@teams/settings/page.tsx`の内容が引き続き表示されています。
 
 
 
-今度はこの状態でブラウザリロードを行ってみると、children slot とanalytics slot については`default.tsx`の内容が表示されることとなります。ハードナビゲーションではNext.js が**active state**を追跡できないため、何を表示すべきか判断がつかないため、デフォルトのコンテンツが表示されるわけですね。
+今度はこの状態でブラウザリロードを行ってみると、teams slot については`default.tsx`の内容が再び表示されることとなります。
+ハードナビゲーションではNext.js が**active state**を追跡できず、何を表示すべきか判断がつかないため、デフォルトのコンテンツが表示されるわけですね。
 
-//gifを入れる2
+![](/images/nextgram-modal/parallel-route-2.gif)
 
+`/parallel-routes/settings`でブラウザリロードを行った場合にも、URLに対応するpageをもたないslotは`default.tsx`の内容を表示します。
 
 ## Intercepting Routes
 
