@@ -149,7 +149,10 @@ children とanalytics のpage 内容については、どちらも表示され�
 
 ![](/images/nextgram-modal/parallel-route-2.gif)
 
-`/parallel-routes/settings`でブラウザリロードを行った場合にも、URLに対応するpageをもたないslotは`default.tsx`の内容を表示します。
+`/parallel-routes/settings`でブラウザリロードを行った場合にも、URLに対応するpageをもたないslot では`default.tsx`の内容が表示されます。
+<br/>
+gifで使用しているコードは以下のものです。
+https://github.com/axoloto210/zenn-article/tree/main/nextgram-modal
 
 ## Intercepting Routes
 
