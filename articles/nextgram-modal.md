@@ -1,5 +1,5 @@
 ---
-title: "公式実装例NextGramを参考にAppRouterでModalを実装しよう"
+title: "公式実装例NextGramを参考にParallelRoutesとInterceptingRoutesでModalを実装しよう"
 emoji: "📷"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [nextjs,approuter,react,typescript]
