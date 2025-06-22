@@ -3,7 +3,7 @@ title: "Next.jsの内部実装で使われているカスタムユーティリ�
 emoji: "🐙"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [TypeScript,Nextjs,contest2025ts]
-published: false
+published: true
 ---
 ## はじめに
 Next.jsの内部実装をみていたときに、`Pick`や`Partial`のようなTypeScriptに組み込みで用意されているユーティリティ型ではなく、いくつか独自で定義されたカスタムユーティリティ型が使用されていたのでその型の仕組みや用途について見ていきたいと思います。
