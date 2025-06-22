@@ -1,6 +1,6 @@
 ---
 title: "Next.jsの内部実装で使われているカスタムユーティリティ型 - オプショナルプロパティのキーを取得する型に型操作の基本が詰まっている！"
-emoji: "🐙"
+emoji: "🐠"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [TypeScript,Nextjs,contest2025ts]
 published: true
@@ -13,7 +13,7 @@ Next.jsの内部実装をみていたときに、`Pick`や`Partial`のようなT
 https://github.com/vercel/next.js/pull/15953
 
 ## 必須プロパティ・オプショナルプロパティのキーだけを抽出する型
-Next.jsには、リンクを表すのに`<a>`タグをよりリッチにした、ソフトナビゲーション（クライアント側のルーティング）やprefetch（ページやデータの事前読み込み）を行うことができる`<Link>`というコンポーネントが用意されています。
+Next.jsには、リンクを表すのに`<a>`タグをよりリッチにした、ソフトナビゲーション（クライアント側のルーティング）や`prefetch`（ページやデータの事前読み込み）を行うことができる`<Link>`というコンポーネントが用意されています。
 
 https://nextjs.org/docs/pages/api-reference/components/link
 
@@ -65,7 +65,7 @@ type Obj = {
 };
 ```
 
-この`Obj`型を`RequiredKeys`型に渡してみると、確かに必須プロパティキーのユニオン型となっています。
+この`Obj`型を`RequiredKeys`の型引数に渡してみると、確かに必須プロパティキーのユニオン型となっています。
 
 
 ```ts
