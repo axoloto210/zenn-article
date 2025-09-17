@@ -82,5 +82,15 @@ type RequiredMappedType = {
 //   bar: number;
 // }
 
-type EmptyConditional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false
-type EmptyTest = EmptyConditional<Obj, "requiredString"> 
+type EmptyConditional<T, K extends keyof T> = {} extends Pick<T, K>
+  ? true
+  : false;
+type EmptyTest = EmptyConditional<Obj, "requiredString">;
+
+type OptionalOnly = { a?: string; b?: number };
+type RequiredOnly = { a: string; b: number };
+
+const x: OptionalOnly = {};
+//@ts-ignore
+const y: RequiredOnly = {};
+//Type '{}' is missing the following properties from type 'RequiredOnly': a, bts(2739)
