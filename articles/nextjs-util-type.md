@@ -117,7 +117,7 @@ const y: RequiredOnly = {}; // Type Error
 //Type '{}' is missing the following properties from type 'RequiredOnly': a, bts(2739)
 ```
 
-### `never`型
+#### `never`型
 また、`never`型の変数にはいかなる値も代入することができません。
 `never`型は、`never`以外の他の型とのユニオン型をとると、`never`部分はユニオンからなくなります。
 
