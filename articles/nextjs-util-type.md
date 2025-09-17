@@ -97,10 +97,27 @@ type Test2 = OptionalKeys<Obj>;
 - 条件型（Conditional Types）
 - マップ型（Mapped Types）とマッピング修飾子（mapping modifier）
 
-#### `{}`型と`never`型
-`{}`型の変数には、`null`と`undefined`を除く値を代入することができます。
-`{}`はプロパティをもたないオブジェクトの型であり、オプショナルプロパティのみをもつオブジェクトであれば代入可能ですが、必須プロパティを1つでももつと型エラーとなります。
+#### `{}`型
+`{}`型はプロパティをもたないオブジェクトの型であり、`{}`型の変数には`null`と`undefined`を除く値を代入することができます。
 
+今回取り上げるカスタム型での`{}`型の重要な性質は、**`{}`型は必須プロパティを1つでももつオブジェクトの型の部分型とはならない**という点です。
+つまり、`{}`型は必須プロパティをもつオブジェクトの型の変数に代入できません。
+
+一方で、`{}`型はオプショナルなプロパティのみをもつオブジェクトの部分型ではあります。
+
+```ts
+type OptionalOnly = { a?: string; b?: number };
+
+type RequiredOnly = { a: string; b: number };
+
+
+const x: OptionalOnly = {}; // OK
+
+const y: RequiredOnly = {}; // Type Error
+//Type '{}' is missing the following properties from type 'RequiredOnly': a, bts(2739)
+```
+
+### `never`型
 また、`never`型の変数にはいかなる値も代入することができません。
 `never`型は、`never`以外の他の型とのユニオン型をとると、`never`部分はユニオンからなくなります。
 
